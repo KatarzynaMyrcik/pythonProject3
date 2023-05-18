@@ -27,5 +27,15 @@ for user in users_base:
         break
     else:
         answer = input("this user doesn't exist in our database. DO you want to create an account?[y - yes, n - no]: ")
-        break
+        if answer == 'y':
+            new_login = input(f" Uprzednio podales uzytkownika {login}. Dla pewnosci podaj nazwe nowego uzytkownika: ")
+            new_passwd = input(f"podaj haslo dla uzytkownika {new_login} :")
+            users_base.update({new_login: new_passwd})
+#            print(users_base)
+            break
+        if answer == 'n':
+            print("Nie chcesz tworzyc nowego uzytkownika")
+            break
+        else:
+            print("podales zla odpowiedz")
 print("koniec zadania")
