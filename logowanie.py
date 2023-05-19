@@ -1,3 +1,4 @@
+
 users_base = {"nana":"maluje", "rysiu":"rzadzi","aniela":"haslo"}
 i = 0
 users = {}
@@ -20,7 +21,6 @@ for user in users_base:
                     break
                 else:
                     print("wrong password. TRY AGAIN")
- #                   print(i)
             if passwd == users_base[user]:
                 print("you are connected")
                 break
@@ -29,7 +29,7 @@ for user in users_base:
         answer = input("this user doesn't exist in our database. DO you want to create an account?[y - yes, n - no]: ")
         if answer == 'y':
             new_login = input(f" Uprzednio podales uzytkownika {login}. Dla pewnosci podaj nazwe nowego uzytkownika: ")
-            new_passwd = input(f"podaj haslo dla uzytkownika {new_login} :")
+            new_passwd = input(f"podaj haslo dla uzytkownika {new_login}: ")
             users_base.update({new_login: new_passwd})
 #            print(users_base)
             break
