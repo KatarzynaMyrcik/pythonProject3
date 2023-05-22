@@ -1,7 +1,7 @@
 import turtle, time, random
 
 
-WIDTH, HEIGHT = 500, 500
+WIDTH, HEIGHT = 600, 600
 x_left_corner = -300
 y_left_corner = 300
 distance = int(WIDTH // 3)
@@ -22,7 +22,7 @@ def init_mesh(x, y, distance):
         hero.penup()
         hero.goto(x + a * distance, y)
         hero.pendown()
-        hero.goto(x + a * distance, y)
+        hero.goto(x + a * distance, -y)
 
         hero.penup()
         hero.goto(x, y - a * distance)
@@ -51,10 +51,12 @@ table = [[None, None, None],
 
 turn = random.choice(['x','o'])
 
+
+def click(x, y):
+        pass
+
 window.onclick(click)
 
-def click(x,y):
-        pass
 
 window.listen()
 window.mainloop()
