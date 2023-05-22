@@ -91,9 +91,9 @@ def click(x, y):
 # dodac do tablicy  ///PROBLEMMM
     table[row][column] = turn
     if turn == "o":
-        turn == "x"
+        turn = "x"
     else:
-        turn == "o"
+        turn = "o"
 # sprawdz czy wygrales
 
 
