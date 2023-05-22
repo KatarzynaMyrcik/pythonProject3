@@ -51,9 +51,38 @@ table = [[None, None, None],
 
 turn = random.choice(['x','o'])
 
+def sprawdz():
+    pass
+
 
 def click(x, y):
-        pass
+#ktore pole
+    column = 0
+    row = 0
+    if x < x_left_corner + distance:
+        column = 0
+    elif x > x_left_corner + 2 * distance:
+        column = 2
+    else:
+        column = 1
+
+    if y < y_left_corner - 2 * distance:
+        row = 2
+    elif y > y_left_corner - distance:
+        row = 0
+    else:
+        row = 1
+    print(row, column)
+
+
+#czy pole jest puste
+
+#narysowac
+
+#dodac do tablicy
+
+#sprwdz czy wygrales
+
 
 window.onclick(click)
 
