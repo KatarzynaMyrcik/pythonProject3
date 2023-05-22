@@ -28,6 +28,7 @@ def init_mesh(x, y, distance):
         hero.goto(x, y - a * distance)
         hero.pendown()
         hero.goto(- x, y - a * distance)
+    return hero
 
 
 def init_object():
@@ -40,14 +41,14 @@ def init_object():
 
 
 window = init_window()
-init_mesh(x_left_corner, y_left_corner, distance)
-time.sleep(5)
+hero = init_mesh(x_left_corner, y_left_corner, distance)
+
 
 table = [[None, None, None],
         [None, None, None],
         [None, None, None]]
 
-#adresowanie [wiersz],[kolumna]
+# adresowanie [wiersz],[kolumna]
 
 turn = random.choice(['x','o'])
 
@@ -56,7 +57,8 @@ def sprawdz():
 
 
 def click(x, y):
-#ktore pole
+    global turn
+# ktore pole
     column = 0
     row = 0
     if x < x_left_corner + distance:
@@ -74,14 +76,25 @@ def click(x, y):
         row = 1
     print(row, column)
 
-
-#czy pole jest puste
-
-#narysowac
-
-#dodac do tablicy
-
-#sprwdz czy wygrales
+# czy pole jest puste
+    if table[[row][column]] != None:
+        return
+# narysowac wspolrzedne srodka pola
+    column_center = (column * distance + distance / 2) - WIDTH / 2
+    row_center = (-row * distance - distance / 2) + HEIGHT / 2
+    hero.penup()
+    hero.goto(column_center - 23, row_center - 35)
+    if turn == 'x':
+        hero.write('X', font=('Arial', 50, "normal"))
+    else:
+        hero.write('O', font=('Arial', 50, "normal"))
+# dodac do tablicy  ///PROBLEMMM
+    table[row][column] = turn
+    if turn == "o":
+        turn == "x"
+    else:
+        turn == "o"
+# sprawdz czy wygrales
 
 
 window.onclick(click)
