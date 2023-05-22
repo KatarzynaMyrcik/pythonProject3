@@ -1,4 +1,6 @@
-import turtle, time, random
+import turtle
+import time
+import random
 
 
 WIDTH, HEIGHT = 600, 600
@@ -15,8 +17,19 @@ def init_window():
     return screen
 
 
+def init_object():
+    hero = turtle.Turtle()
+    hero.color("white")
+    hero.pensize(7)
+    hero.speed(0)
+    hero.hideturtle()
+    return hero
+
+
 # shape siatka
-def init_mesh(x, y, distance):
+def init_mesh(x, y):
+    global distance
+    global hero
     hero = init_object()
     for a in [1, 2]:
         hero.penup()
@@ -31,34 +44,36 @@ def init_mesh(x, y, distance):
     return hero
 
 
-def init_object():
-    hero = turtle.Turtle()
-    hero.color("white")
-    hero.pensize(7)
-    hero.speed(0)
-    hero.hideturtle()
-    return hero
-
-
 window = init_window()
-hero = init_mesh(x_left_corner, y_left_corner, distance)
+hero = init_mesh(x_left_corner, y_left_corner)
 
 
-table = [[None, None, None],
-        [None, None, None],
-        [None, None, None]]
+table = [[None, None, None], [None, None, None], [None, None, None]]
 
 # adresowanie [wiersz],[kolumna]
 
 turn = random.choice(['x','o'])
 
-def sprawdz():
-    pass
+
+def check():
+    # po skosie
+    if table[0][0] == table[1][1] == table[2][2]:
+        return table[0][0]
+    elif table[0][2] == table[1][1] == table[2][0]:
+        return table[2][0]
+    # pionowo
+    for w in range(2):
+        if table[0][w] == table[1][w] == table[2][w]:
+            return table[0][w]
+    # poziomo
+    for l in range(2):
+        if table[l][0] == table[l][1] == table[l][2]:
+            return table[l][0]
 
 
 def click(x, y):
     global turn
-# ktore pole
+    # ktore pole
     column = 0
     row = 0
     if x < x_left_corner + distance:
@@ -74,12 +89,12 @@ def click(x, y):
         row = 0
     else:
         row = 1
-    print(row, column)
+    # print(row, column)
 
-# czy pole jest puste
+    # czy pole jest puste
     if table[row][column] != None:
         return
-# narysowac wspolrzedne srodka pola
+    # narysowac wspolrzedne srodka pola
     column_center = (column * distance + distance / 2) - WIDTH / 2
     row_center = (-row * distance - distance / 2) + HEIGHT / 2
     hero.penup()
@@ -88,17 +103,22 @@ def click(x, y):
         hero.write('X', font=('Arial', 50, "normal"))
     else:
         hero.write('O', font=('Arial', 50, "normal"))
-# dodac do tablicy  ///PROBLEMMM
+    # dodac do tablicy
     table[row][column] = turn
     if turn == "o":
         turn = "x"
     else:
         turn = "o"
-# sprawdz czy wygrales
+    # sprawdz czy wygrales
+    if check() != None:
+        hero.penup()
+        hero.goto(-150, 0)
+        time.sleep(1)
+        hero.clear()
+        hero.write("Wygraly '" + check() + "'", font=("arial", 50, "bold"))
 
 
 window.onclick(click)
-
 
 window.listen()
 window.mainloop()
