@@ -77,7 +77,7 @@ def click(x, y):
     print(row, column)
 
 # czy pole jest puste
-    if table[[row][column]] != None:
+    if table[row][column] != None:
         return
 # narysowac wspolrzedne srodka pola
     column_center = (column * distance + distance / 2) - WIDTH / 2
